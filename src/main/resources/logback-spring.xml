@@ -38,7 +38,7 @@
     </root>
      
     <!-- LOG "com.bootcamp.*" at TRACE level -->
-    <logger name="com.bootcamp" level="trace" additivity="false">
+    <logger name="everis.bootcamp" level="trace" additivity="false">
         <appender-ref ref="RollingFile" />
         <appender-ref ref="Console" />
     </logger>
