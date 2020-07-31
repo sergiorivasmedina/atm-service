@@ -29,4 +29,22 @@ public class AtmService {
                     .bodyToMono(AccountDTO.class);
         });
     }
+
+    public Mono<AccountDTO> withdrawATM(String accountId, Double amount) {
+        //make TransactionType object for withdraw
+        TransactionAccountDTO transactionAccountDto = new TransactionAccountDTO(amount, "5f09e93466bb6e3bd0a30c78");
+        //create a new account transaction
+        Mono<TransactionAccountDTO> newTransaction = WebClient.create(accountsUri + "/transaction/new")
+                                    .post()
+                                    .body(Mono.just(transactionAccountDto), TransactionAccountDTO.class)
+                                    .retrieve()
+                                    .bodyToMono(TransactionAccountDTO.class);
+        //make a withdraw
+        return newTransaction.flatMap(transaction -> {
+            return WebClient.create(accountsUri + "/account/atm/withdraw/"+accountId+"/"+amount+"/"+transaction.getIdAccountTransaction()+"")
+                    .put()
+                    .retrieve()
+                    .bodyToMono(AccountDTO.class);
+        });
+    }
 }

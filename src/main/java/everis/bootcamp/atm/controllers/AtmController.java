@@ -21,4 +21,8 @@ public class AtmController {
     }
 
     //withdraw
+    @GetMapping(value = "/atm/withdraw/{bankAccountId}/{amount}")
+    public Mono<AccountDTO> withdrawATM(@PathVariable(name = "bankAccountId") String bankAccountId, @PathVariable(name = "amount") Double amount) {
+        return atmService.withdrawATM(bankAccountId, amount);
+    }
 }
