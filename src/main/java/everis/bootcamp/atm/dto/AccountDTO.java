@@ -14,4 +14,10 @@ public class AccountDTO {
     private String currency;
     private int numberOfAtmTransactions;
     private double commission;
+
+    public AccountDTO(String idBankAccount) {
+        this.idBankAccount = idBankAccount;
+        this.availableBalance = null;
+        this.accountType = this.currency = null;
+    }
 }
