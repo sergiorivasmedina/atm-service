@@ -31,4 +31,10 @@ public class AtmController {
     public Mono<AccountDTO> depositToOtherBank(@PathVariable(name = "bankAccountId") String bankAccountId,@PathVariable(name = "amount") Double amount) {
         return atmService.depositToOtherBank(bankAccountId, amount);
     }
+
+    //withdraw to other bank from ATM
+    @GetMapping(value = "/atm/otherBank/withdraw/{bankAccountId}/{amount}")
+    public Mono<AccountDTO> withdrawToOtherBank(@PathVariable(name = "bankAccountId") String bankAccountId,@PathVariable(name = "amount") Double amount) {
+        return atmService.withdrawToOtherBank(bankAccountId, amount);
+    }
 }
